@@ -1,0 +1,10 @@
+script:
+- echo 'Just a test :-)'
+
+deploy:
+  provider: releases
+  api_key:
+    secure: FOWKnqBMiAqfQ5/rD/y8jGYu/YmJ1V/XKtHrpgS5HAgKHD59JPk24/bwG/IoG7pSwHUbx8NUrqFL+P9eDh2sfZLDuSf9uFZQuyQHa530NN4fCq9utWd7xiMxRv6fJcWX09blXyUQkw7/n4vjsJau5qLCU01DnLDZJYIGE4RTb5g=
+  file: .travis.yml
+  on:
+    repo: sbrunner/test
