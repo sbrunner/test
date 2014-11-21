@@ -8,4 +8,5 @@ deploy:
   file: test
   on:
     tags: true
+    all_branches: true
     repo: sbrunner/test
