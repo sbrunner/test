@@ -7,4 +7,5 @@ deploy:
     secure: FOWKnqBMiAqfQ5/rD/y8jGYu/YmJ1V/XKtHrpgS5HAgKHD59JPk24/bwG/IoG7pSwHUbx8NUrqFL+P9eDh2sfZLDuSf9uFZQuyQHa530NN4fCq9utWd7xiMxRv6fJcWX09blXyUQkw7/n4vjsJau5qLCU01DnLDZJYIGE4RTb5g=
   file: .travis.yml
   on:
+    tags: true
     repo: sbrunner/test
