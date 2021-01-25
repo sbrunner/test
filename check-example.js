@@ -73,13 +73,13 @@ function loaded(page, browser) {
         await browser.close();
       }
     }
-  }, 500);
+  }, 1000);
 }
 (async () => {
   browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  await page.setViewport({ width: 1920 * 2, height: 1080 * 2 });
+  await page.setViewport({ width: 1920 * 4, height: 1080 * 4 });
   await page.setRequestInterception(true);
   page.on("pageerror", async (e) => {
     console.log("Page error");
@@ -91,7 +91,7 @@ function loaded(page, browser) {
     const originalUrl = request.url();
     requestsURL.add(originalUrl);
     if (originalUrl.startsWith("https://wmts.geo.admin.ch/")) {
-      console.log(originalUrl);
+      //console.log(originalUrl);
       nbTiles += 1;
     }
     request.continue({
