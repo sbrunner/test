@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"
+    type="text/css">
+  <style>
+    .map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.0/proj4.js"
+    integrity="sha512-AI3S7dMy1Pi/wQPRocZ6NearDwfaqb2BRmuJzSgFQJUOXrfSLtnMNceJPgV6arRFwJRh8Cu4snVQ3VqKrWXpkw=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+  <title>OpenLayers 5.3.0</title>
+</head>
+
+<body>
+  <div id="map" class="map"></div>
+  <script>
+    const _crs = 'EPSG:2056';
+    const _extent = [2420000, 1030000, 2900000, 1350000];
+    proj4.defs(_crs,
+      '+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333'
+      + ' +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=bessel '
+      + '+towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs');
+    ol.proj.proj4.register(proj4);
+    const _projection = new ol.proj.Projection({
+      code: _crs,
+      extent: _extent,
+    });
+
+    fetch('https://wmts.geo.admin.ch/EPSG/2056/1.0.0/WMTSCapabilities.xml?lang=fr')
+      .then(response => response.text())
+      .then((text) => {
+        let parser = new ol.format.WMTSCapabilities();
+        let result = parser.read(text);
+        let options1 = ol.source.WMTS.optionsFromCapabilities(result, {
+          layer: 'ch.are.belastung-gueterverkehr-strasse',
+          format: 'image/png',
+          matrixSet: _crs,
+        });
+        let options2 = ol.source.WMTS.optionsFromCapabilities(result, {
+          layer: 'ch.are.belastung-personenverkehr-bahn',
+          format: 'image/png',
+          matrixSet: _crs,
+        });
+        let options3 = ol.source.WMTS.optionsFromCapabilities(result, {
+          layer: 'ch.are.belastung-personenverkehr-strasse',
+          matrixSet: _crs,
+        });
+        let options4 = ol.source.WMTS.optionsFromCapabilities(result, {
+          layer: 'ch.are.erreichbarkeit-miv',
+          matrixSet: _crs,
+        });
+        let options5 = ol.source.WMTS.optionsFromCapabilities(result, {
+          layer: 'ch.are.erreichbarkeit-oev',
+          matrixSet: _crs,
+        });
+
+        map = new ol.Map({
+          layers: [
+            new ol.layer.Tile({
+              opacity: 1,
+              source: new ol.source.WMTS(options3),
+            }),
+            new ol.layer.Tile({
+              opacity: 0.5,
+              source: new ol.source.WMTS(options2),
+            }),
+            new ol.layer.Tile({
+              opacity: 0.5,
+              source: new ol.source.WMTS(options1),
+            })],
+          target: 'map',
+          view: new ol.View({
+            projection: _projection,
+            center: ol.proj.fromLonLat([6.80, 47.05], _projection),
+            zoom: 5,
+          }),
+        });
+      });
+  </script>
+</body>
+
+</html>
