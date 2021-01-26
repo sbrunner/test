@@ -46,34 +46,24 @@
             layer: "ch.are.belastung-gueterverkehr-strasse",
             format: "image/png",
             matrixSet: _crs,
-            transition: 0,
           });
           let options2 = ol.source.WMTS.optionsFromCapabilities(result, {
             layer: "ch.are.belastung-personenverkehr-bahn",
             format: "image/png",
             matrixSet: _crs,
-            transition: 0,
           });
           let options3 = ol.source.WMTS.optionsFromCapabilities(result, {
             layer: "ch.are.belastung-personenverkehr-strasse",
             matrixSet: _crs,
-            transition: 0,
           });
           let options4 = ol.source.WMTS.optionsFromCapabilities(result, {
             layer: "ch.are.erreichbarkeit-miv",
             matrixSet: _crs,
-            transition: 0,
           });
           let options5 = ol.source.WMTS.optionsFromCapabilities(result, {
             layer: "ch.are.erreichbarkeit-oev",
             matrixSet: _crs,
-            transition: 0,
           });
-          options1.transition = 0;
-          options2.transition = 0;
-          options3.transition = 0;
-          options4.transition = 0;
-          options5.transition = 0;
           console.log(options5);
           let source5 = new ol.source.WMTS(options5);
 
