@@ -33,10 +33,7 @@
           "+towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs"
       );
       ol.proj.proj4.register(proj4);
-      const _projection = new ol.proj.Projection({
-        code: _crs,
-        extent: _extent,
-      });
+      const _projection = ol.proj.get("EPSG:2056");
 
       fetch(
         "https://wmts.geo.admin.ch/EPSG/2056/1.0.0/WMTSCapabilities.xml?lang=fr"
