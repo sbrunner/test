@@ -77,11 +77,13 @@
           options3.transition = 0;
           options4.transition = 0;
           options5.transition = 0;
+          console.log(options5);
+          let source5 = new ol.source.WMTS(options5);
 
           map = new ol.Map({
             layers: [
               new ol.layer.Tile({
-                source: new ol.source.WMTS(options5),
+                source: source5,
               }),
               new ol.layer.Tile({
                 source: new ol.source.WMTS(options4),
