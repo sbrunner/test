@@ -78,6 +78,7 @@
           let source5 = new ol.source.WMTS(options5);
 
           map = new ol.Map({
+            maxTilesLoading: Infinity,
             layers: [
               new ol.layer.Tile({
                 source: source5,
